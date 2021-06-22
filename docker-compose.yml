@@ -1,19 +1,26 @@
 version: "3.7"
 services:
+  # COMPOSE_PROJECT_NAME=site
+
+  gateway:
+    build:
+      context: gateway/docker/development/nginx
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - frontend
+      - api
+
   frontend:
     build:
       context: frontend/docker/development/nginx
-    ports:
-      - "8080:80"
     volumes:
       - ./frontend:/app
-  # COMPOSE_PROJECT_NAME=site
 
   api:
     build:
       context: api/docker/development/nginx
-    ports:
-      - "8081:80"
     volumes:
       - ./api:/app
     depends_on:
