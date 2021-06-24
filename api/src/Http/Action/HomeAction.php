@@ -5,16 +5,32 @@ declare(strict_types=1);
 namespace App\Http\Action;
 
 use App\Http\Http;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use stdClass;
+use JsonException;
 
-class HomeAction
+class HomeAction implements RequestHandlerInterface
 {
+    private ResponseFactoryInterface $factory;
+
     /**
-     * @throws \JsonException
+     * HomeAction constructor.
+     * @param ResponseFactoryInterface $factory
      */
-    public function __invoke(Request $request, Response $response, $args): Response
+    public function __construct(ResponseFactoryInterface $factory)
     {
-        return Http::json($response, new \stdClass());
+        $this->factory = $factory;
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        $response = $this->factory->createResponse();
+        return Http::json($response, new stdClass());
     }
 }
