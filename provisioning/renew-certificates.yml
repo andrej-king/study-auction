@@ -1,6 +1,6 @@
 ---
 -   name: Renew Certificates
-    hosts: all
+    hosts: site
     remote_user: ubuntu
     tasks:
       -   name: Renew certificates
