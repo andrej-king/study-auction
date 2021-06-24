@@ -4,6 +4,9 @@ installs:
 site:
 	ansible-playbook -i hosts.yml site.yml # -vvvv show log level details
 
+upgrade:
+	ansible-playbook -i hosts.yml upgrade.yml
+
 renew-certificates:
 	ansible-playbook -i hosts.yml renew-certificates.yml
 
