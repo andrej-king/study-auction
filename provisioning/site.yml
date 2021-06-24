@@ -3,8 +3,15 @@
     hosts: all
     remote_user: ubuntu
     become: yes
+    vars:
+        certbot_email: andrej.tcs@gmail.com
+        certbot_hosts:
+            - demo-auction.studyfield.org
+            - api.demo-auction.studyfield.org
     tasks:
         -   import_tasks: tasks/setup_docker.yml
+        -   import_tasks: tasks/setup_certbot.yml
+        -   import_tasks: tasks/generate_certificates.yml
     handlers:
         -   name: Start docker on boot
             systemd:
