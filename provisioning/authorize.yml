@@ -1,7 +1,8 @@
 ---
 -   name: Add authorized key
     hosts: site
-    remote_user: root
+    remote_user: ubuntu
+    become: yes
     tasks:
       -   name: Add user authorized key
           authorized_key:
