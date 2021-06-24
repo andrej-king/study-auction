@@ -1,4 +1,8 @@
 # use example: make init
+# docker login
+# REGISTRY=apedchenko IMAGE_TAG=master-1 make build
+# REGISTRY=apedchenko IMAGE_TAG=master-1 make push
+# HOST=deploy@ip PORT=22 REGISTRY=apedchenko IMAGE_TAG=master-1 BUILD_NUMBER=1  make deploy
 init: docker-down-clear docker-pull docker-build docker-up
 up: docker-up
 down: docker-down
