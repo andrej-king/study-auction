@@ -3,11 +3,8 @@
     hosts: all
     remote_user: ubuntu
     become: yes
-    vars:
-        certbot_email: andrej.tcs@gmail.com
-        certbot_hosts:
-            - demo-auction.studyfield.org
-            - api.demo-auction.studyfield.org
+    vars_files:
+        - envs/certbot.yml
     tasks:
         -   import_tasks: tasks/setup_docker.yml
         -   import_tasks: tasks/setup_certbot.yml

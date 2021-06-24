@@ -1,0 +1,4 @@
+certbot_email: andrej.tcs@gmail.com
+certbot_hosts:
+  - demo-auction.studyfield.org
+  - api.demo-auction.studyfield.org
