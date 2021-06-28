@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-use DI\ContainerBuilder;
+use Psr\Container\ContainerInterface;
 use Slim\Factory\AppFactory;
 
 http_response_code(500); // default status
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$builder = new ContainerBuilder();
-$builder->addDefinitions(require __DIR__ . '/../config/dependencies.php');
-$container = $builder->build();
+/** @var ContainerInterface $container */
+$container = require __DIR__ . '/../config/container.php';
 
 $app = AppFactory::createFromContainer($container);
 
