@@ -10,13 +10,7 @@ http_response_code(500); // default status
 require __DIR__ . '/../vendor/autoload.php';
 
 $builder = new ContainerBuilder();
-
-$builder->addDefinitions([
-   'config' => [
-       'debug' => (bool)getenv('APP_DEBUG')
-   ]
-]);
-
+$builder->addDefinitions(require __DIR__ . '/../config/dependencies.php');
 $container = $builder->build();
 
 $app = AppFactory::createFromContainer($container);
