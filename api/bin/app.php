@@ -17,7 +17,8 @@ $commands = $container->get('config')['console']['commands'];
 foreach ($commands as $command) {
     $cli->add($container->get($command));
 }
-// show all allow console commands: docker-compose run --rm api-php-cli php bin/app.php
-// run special console command: docker-compose run --rm api-php-cli php bin/app.php hello
+// run console commands with added script in composer.json:
+// docker-compose run --rm api-php-cli composer app
+// docker-compose run --rm api-php-cli composer app hello
 
 $cli->run();
