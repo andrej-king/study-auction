@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Console\HelloCommand;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 
