@@ -13,6 +13,11 @@ $container = require __DIR__ . '/../config/container.php';
 
 $cli = new Application('Console');
 
-$cli->add($container->get(HelloCommand::class)); // run console command docker-compose run --rm api-php-cli php bin/app.php hello
+$commands = $container->get('config')['console']['commands'];
+foreach ($commands as $command) {
+    $cli->add($container->get($command));
+}
+// show all allow console commands: docker-compose run --rm api-php-cli php bin/app.php
+// run special console command: docker-compose run --rm api-php-cli php bin/app.php hello
 
 $cli->run();
