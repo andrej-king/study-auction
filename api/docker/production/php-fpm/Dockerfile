@@ -1,6 +1,6 @@
 FROM php:7.4-fpm-alpine as builder
 
-RUN apk add unzip
+RUN apk add --no-cache unzip
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
