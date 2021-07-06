@@ -29,7 +29,8 @@ api-composer-install:
 	docker-compose run --rm api-php-cli composer install
 
 api-lint:
-	docker-compose run --rm api-php-cli composer lint
+	docker-compose run --rm api-php-cli composer lint # phplint - syntax check validator
+	docker-compose run --rm api-php-cli composer cs-check # code sniffer - code style validator
 
 build: build-gateway build-frontend build-api
 
