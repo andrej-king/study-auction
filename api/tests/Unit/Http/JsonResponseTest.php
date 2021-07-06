@@ -51,8 +51,8 @@ class JsonResponseTest extends TestCase
 
         $response = new JsonResponse($object);
 
-        self::assertEquals('{"str":"value","int":1,"none":null}', $response->getBody()->getContents());
-        self::assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('{"str":"value","int":1,"none":null}', $response->getBody()->getContents());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testArray(): void
@@ -61,7 +61,7 @@ class JsonResponseTest extends TestCase
 
         $response = new JsonResponse($array);
 
-        self::assertEquals('{"str":"value","int":1,"none":null}', $response->getBody()->getContents());
-        self::assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('{"str":"value","int":1,"none":null}', $response->getBody()->getContents());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 }
