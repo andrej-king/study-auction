@@ -7,6 +7,8 @@ init: docker-down-clear docker-pull docker-build docker-up api-init
 up: docker-up
 down: docker-down
 restart: docker-down docker-up
+lint: api-lint
+analyze: api-analyze
 
 docker-up:
 	docker-compose up -d # --scale frontend=3
@@ -31,6 +33,9 @@ api-composer-install:
 api-lint:
 	docker-compose run --rm api-php-cli composer lint # phplint - syntax check validator
 	docker-compose run --rm api-php-cli composer cs-check # code sniffer - code style validator
+
+api-analyze:
+	docker-compose run --rm api-php-cli composer psalm # static analysis tool for php
 
 build: build-gateway build-frontend build-api
 
