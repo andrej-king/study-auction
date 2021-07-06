@@ -1,3 +1,5 @@
 /.idea
 /vendor
-/var/*
+/var/.phplint.json
+/var/.phpcs.json
+/var/.phpunit.result.cache

@@ -9,6 +9,7 @@ down: docker-down
 restart: docker-down docker-up
 lint: api-lint
 analyze: api-analyze
+test: api-test
 
 docker-up:
 	docker-compose up -d # --scale frontend=3
@@ -36,6 +37,9 @@ api-lint:
 
 api-analyze:
 	docker-compose run --rm api-php-cli composer psalm # static analysis tool for php
+
+api-test:
+	docker-compose run --rm api-php-cli composer test
 
 build: build-gateway build-frontend build-api
 
