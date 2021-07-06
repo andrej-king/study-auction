@@ -18,50 +18,44 @@ class JsonResponseTest extends TestCase
         $this->assertEquals(StatusCodeInterface::STATUS_CREATED, $response->getStatusCode());
     }
 
-    public function testNull(): void
+    /**
+     * @dataProvider getCases
+     * @param mixed $source
+     * @param mixed $expect
+     */
+    public function testResponse($source, $expect): void
     {
-        $response = new JsonResponse(null);
+        $response = new JsonResponse($source);
 
-        $this->assertEquals('null', $response->getBody()->getContents());
+        $this->assertEquals('application/json', $response->getHeaderLine('Content-Type'));
+        $this->assertEquals($expect, $response->getBody()->getContents());
         $this->assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
     }
 
-    public function testInt(): void
-    {
-        $response = new JsonResponse(12);
 
-        $this->assertEquals('12', $response->getBody()->getContents());
-        $this->assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-    }
-
-    public function testString(): void
-    {
-        $response = new JsonResponse('12');
-
-        $this->assertEquals('"12"', $response->getBody()->getContents());
-        $this->assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
-    }
-
-    public function testObject(): void
+    /**
+     * @return array<mixed>
+     */
+    public function getCases(): array
     {
         $object = new stdClass();
         $object->str = 'value';
         $object->int = 1;
         $object->none = null;
 
-        $response = new JsonResponse($object);
+        $array = [
+            'str'  => 'value',
+            'int'  => 1,
+            'none' => null
+        ];
 
-        $this->assertEquals('{"str":"value","int":1,"none":null}', $response->getBody()->getContents());
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    public function testArray(): void
-    {
-        $array = ['str' => 'value', 'int' => 1, 'none' => null];
-
-        $response = new JsonResponse($array);
-
-        $this->assertEquals('{"str":"value","int":1,"none":null}', $response->getBody()->getContents());
-        $this->assertEquals(200, $response->getStatusCode());
+        return [
+            'null'   => [null, 'null'],
+            'empty'  => ['', '""'],
+            'number' => [12, '12'],
+            'string' => ['12', '"12"'],
+            'object' => [$object, '{"str":"value","int":1,"none":null}'],
+            'array'  => [$array, '{"str":"value","int":1,"none":null}'],
+        ];
     }
 }

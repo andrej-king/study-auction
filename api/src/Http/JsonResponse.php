@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\Http;
 
@@ -13,7 +13,7 @@ class JsonResponse extends Response
 {
     /**
      * @param mixed $data
-     * @param int $status
+     * @param int   $status
      */
     public function __construct($data, int $status = StatusCodeInterface::STATUS_OK)
     {
