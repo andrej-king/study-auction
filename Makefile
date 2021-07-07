@@ -48,7 +48,10 @@ api-lint:
 	docker-compose run --rm api-php-cli composer cs-check # code sniffer - code style validator
 
 api-analyze:
-	docker-compose run --rm api-php-cli composer psalm # static analysis tool for php
+	docker-compose run --rm api-php-cli composer psalm -- --no-diff # static analysis tool for php without cache
+
+api-analyze-diff:
+	docker-compose run --rm api-php-cli composer psalm # static analysis tool for php with cache
 
 api-test:
 	docker-compose run --rm api-php-cli composer test
