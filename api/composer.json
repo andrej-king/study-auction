@@ -35,7 +35,7 @@
         "lint": "phplint",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "psalm": "psalm",
+        "psalm": "psalm --config=psalm.xml",
         "test": "phpunit --colors=always",
         "test-coverage": "XDEBUG_MODE=coverage phpunit --colors=always --coverage-html var/coverage",
         "app": "php bin/app.php --ansi"
