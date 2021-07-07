@@ -6,6 +6,9 @@ namespace Test\Functional;
 
 use Fig\Http\Message\StatusCodeInterface;
 
+/**
+ * @coversNothing
+ */
 class NotFoundTest extends WebTestCase
 {
     public function testNotFound(): void
