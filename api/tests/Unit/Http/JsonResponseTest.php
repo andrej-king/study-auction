@@ -9,9 +9,6 @@ use Fig\Http\Message\StatusCodeInterface;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * @covers \App\Http\JsonResponse
- */
 class JsonResponseTest extends TestCase
 {
     public function testIntWithCode(): void
