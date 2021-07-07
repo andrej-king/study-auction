@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Test\Unit\Http;
 
 use App\Http\JsonResponse;
@@ -13,9 +15,9 @@ class JsonResponseTest extends TestCase
     {
         $response = new JsonResponse(0, StatusCodeInterface::STATUS_CREATED);
 
-        $this->assertEquals('application/json', $response->getHeaderLine('Content-Type'));
-        $this->assertEquals('0', $response->getBody()->getContents());
-        $this->assertEquals(StatusCodeInterface::STATUS_CREATED, $response->getStatusCode());
+        self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertEquals('0', $response->getBody()->getContents());
+        self::assertEquals(StatusCodeInterface::STATUS_CREATED, $response->getStatusCode());
     }
 
     /**
@@ -27,9 +29,9 @@ class JsonResponseTest extends TestCase
     {
         $response = new JsonResponse($source);
 
-        $this->assertEquals('application/json', $response->getHeaderLine('Content-Type'));
-        $this->assertEquals($expect, $response->getBody()->getContents());
-        $this->assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
+        self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertEquals($expect, $response->getBody()->getContents());
+        self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
     }
 
 
