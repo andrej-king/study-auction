@@ -8,6 +8,14 @@ use Fig\Http\Message\StatusCodeInterface;
 
 class HomeTest extends WebTestCase
 {
+    public function testMethod(): void
+    {
+        $response = $this->app()->handle(self::json('POST', '/'));
+
+        self::assertEquals(StatusCodeInterface::STATUS_METHOD_NOT_ALLOWED, $response->getStatusCode());
+    }
+
+
     public function testSuccess(): void
     {
         $response = $this->app()->handle(self::json('GET', '/'));
