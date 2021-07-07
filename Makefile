@@ -3,7 +3,7 @@
 # REGISTRY=apedchenko IMAGE_TAG=master-1 make build
 # REGISTRY=apedchenko IMAGE_TAG=master-1 make push
 # HOST=deploy@ip PORT=22 REGISTRY=apedchenko IMAGE_TAG=master-1 BUILD_NUMBER=1  make deploy
-init: docker-down-clear docker-pull docker-build docker-up api-init
+init: docker-down-clear api-clear docker-pull docker-build docker-up api-init
 up: docker-up
 down: docker-down
 restart: docker-down docker-up
@@ -31,6 +31,9 @@ docker-pull:
 
 docker-build:
 	docker-compose build --pull
+
+api-clear:
+	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/*' # delete all items except with '.' in start
 
 api-init: api-composer-install api-permissions
 
