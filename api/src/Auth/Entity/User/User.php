@@ -8,6 +8,7 @@ use DateTimeImmutable;
 
 class User
 {
+
     private Id $id;
     private DateTimeImmutable $date;
     private Email $email;
