@@ -4,9 +4,27 @@ declare(strict_types=1);
 
 namespace App\Auth\Service;
 
-interface PasswordHasher
-{
-    public function hash(string $password): string;
+use RuntimeException;
+use Webmozart\Assert\Assert;
 
-    public function validate(string $password, string $hash): bool;
+class PasswordHasher
+{
+    public function hash(string $password): string
+    {
+        Assert::notEmpty($password);
+        /** @var string|false|null $hash */
+        $hash = password_hash($password, PASSWORD_ARGON2I);
+        if ($hash === null) {
+            throw new RuntimeException('Invalid hash algorithm.');
+        }
+        if ($hash === false) {
+            throw new RuntimeException('Unable to generate hash.');
+        }
+        return $hash;
+    }
+
+    public function validate(string $password, string $hash): bool
+    {
+        return password_verify($password, $hash);
+    }
 }
