@@ -8,12 +8,12 @@ use DateTimeImmutable;
 
 class User
 {
-
     private Id $id;
     private DateTimeImmutable $date;
     private Email $email;
     private string $passwordHash;
     private ?Token $joinConfirmToken;
+    private Status $status;
 
     public function __construct(
         Id $id,
@@ -27,6 +27,23 @@ class User
         $this->email = $email;
         $this->passwordHash = $passwordHash;
         $this->joinConfirmToken = $token;
+        $this->status = Status::wait();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWait(): bool
+    {
+        return $this->status->isWait();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->status->isActive();
     }
 
     /**
