@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity\User;
 
+use ArrayObject;
 use DateTimeImmutable;
 use DomainException;
 
@@ -12,31 +13,66 @@ class User
     private Id $id;
     private DateTimeImmutable $date;
     private Email $email;
-    private string $passwordHash;
-    private ?Token $joinConfirmToken;
+    private ?string $passwordHash = null;
     private Status $status;
+    private ?Token $joinConfirmToken = null;
+    private ArrayObject $networks;
 
     /**
      * User constructor.
      * @param Id                $id
      * @param DateTimeImmutable $date
      * @param Email             $email
+     * @param Status            $status
+     */
+    private function __construct(Id $id, DateTimeImmutable $date, Email $email, Status $status)
+    {
+        $this->id = $id;
+        $this->date = $date;
+        $this->email = $email;
+        $this->status = $status;
+        $this->networks = new ArrayObject();
+    }
+
+    /**
+     * Named constructor for create join user with email
+     * @param Id                $id
+     * @param DateTimeImmutable $date
+     * @param Email             $email
      * @param string            $passwordHash
      * @param Token             $token
+     * @return self
      */
-    public function __construct(
+    public static function requestJoinByEmail(
         Id $id,
         DateTimeImmutable $date,
         Email $email,
         string $passwordHash,
         Token $token
-    ) {
-        $this->id = $id;
-        $this->date = $date;
-        $this->email = $email;
-        $this->passwordHash = $passwordHash;
-        $this->joinConfirmToken = $token;
-        $this->status = Status::wait();
+    ): self {
+        $user = new self($id, $date, $email, Status::wait());
+        $user->passwordHash = $passwordHash;
+        $user->joinConfirmToken = $token;
+        return $user;
+    }
+
+    /**
+     * Named constructor for create join user with social networks
+     * @param Id                $id
+     * @param DateTimeImmutable $date
+     * @param Email             $email
+     * @param NetworkIdentity   $identity
+     * @return self
+     */
+    public static function joinByNetwork(
+        Id $id,
+        DateTimeImmutable $date,
+        Email $email,
+        NetworkIdentity $identity
+    ): self {
+        $user = new self($id, $date, $email, Status::active());
+        $user->networks->append($identity);
+        return $user;
     }
 
     /**
@@ -109,5 +145,14 @@ class User
         $this->joinConfirmToken->validate($token, $date);
         $this->status = Status::active();
         $this->joinConfirmToken = null;
+    }
+
+    /**
+     * @return NetworkIdentity[]
+     */
+    public function getNetworks(): array
+    {
+        /** @var NetworkIdentity[] */
+        return $this->networks->getArrayCopy();
     }
 }
