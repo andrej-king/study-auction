@@ -9,6 +9,9 @@ use stdClass;
 
 class JsonResponseTest extends TestCase
 {
+    /**
+     * Check create status code
+     */
     public function testIntWithCode(): void
     {
         $response = new JsonResponse(0, StatusCodeInterface::STATUS_CREATED);

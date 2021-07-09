@@ -13,6 +13,9 @@ use PHPUnit\Framework\TestCase;
  */
 class PasswordHasherTest extends TestCase
 {
+    /**
+     * Test PasswordHasher result
+     */
     public function testHash(): void
     {
         $hasher = new PasswordHasher(16);
@@ -23,6 +26,9 @@ class PasswordHasherTest extends TestCase
         self::assertNotEquals($password, $hashe);
     }
 
+    /**
+     * Test behavior if try create PasswordHasher with empty hash value
+     */
     public function testHashEmpty(): void
     {
         $hasher = new PasswordHasher(16);
@@ -31,6 +37,9 @@ class PasswordHasherTest extends TestCase
         $hasher->hash('');
     }
 
+    /**
+     * Test PasswordHasher validator
+     */
     public function testValidate(): void
     {
         $hasher = new PasswordHasher(16);

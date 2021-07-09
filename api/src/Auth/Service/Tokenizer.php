@@ -13,11 +13,20 @@ class Tokenizer
 {
     private DateInterval $interval;
 
+    /**
+     * Tokenizer constructor.
+     * @param DateInterval $interval
+     */
     public function __construct(DateInterval $interval)
     {
         $this->interval = $interval;
     }
 
+    /**
+     * Token generator
+     * @param DateTimeImmutable $date
+     * @return Token
+     */
     public function generate(DateTimeImmutable $date): Token
     {
         return new Token(

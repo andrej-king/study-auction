@@ -12,6 +12,9 @@ use PHPUnit\Framework\TestCase;
  */
 class StatusTest extends TestCase
 {
+    /**
+     * Check status 'wait'
+     */
     public function testWait(): void
     {
         $status = Status::wait();
@@ -20,6 +23,9 @@ class StatusTest extends TestCase
         self::assertFalse($status->isActive());
     }
 
+    /**
+     * Check status 'active'
+     */
     public function testActive(): void
     {
         $status = Status::active();

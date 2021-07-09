@@ -14,6 +14,9 @@ use PHPUnit\Framework\TestCase;
  */
 class TokenizerTest extends TestCase
 {
+    /**
+     * Tokenizer test
+     */
     public function testSuccess(): void
     {
         $interval = new DateInterval('PT1H'); // PT1H = plus time 1 hour

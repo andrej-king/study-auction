@@ -25,6 +25,9 @@ class Handler
         $this->flusher = $flusher;
     }
 
+    /**
+     * @param Command $command
+     */
     public function handle(Command $command): void
     {
         if (!$user = $this->users->findByConfirmToken($command->token)) {

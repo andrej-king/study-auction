@@ -23,6 +23,14 @@ class Handler
     private Flusher $flusher;
     private JoinConfirmationSender $sender;
 
+    /**
+     * Handler constructor.
+     * @param UserRepository         $users
+     * @param PasswordHasher         $hasher
+     * @param Tokenizer              $tokenizer
+     * @param Flusher                $flusher
+     * @param JoinConfirmationSender $sender
+     */
     public function __construct(
         UserRepository $users,
         PasswordHasher $hasher,
@@ -37,7 +45,9 @@ class Handler
         $this->sender = $sender;
     }
 
-
+    /**
+     * @param Command $command
+     */
     public function handle(Command $command): void
     {
         $email = new Email($command->email);

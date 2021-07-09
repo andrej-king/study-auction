@@ -17,6 +17,9 @@ use Ramsey\Uuid\Uuid;
  */
 class RequestTest extends TestCase
 {
+    /**
+     * Test request to create user
+     */
     public function testSuccess(): void
     {
         $user = new User(

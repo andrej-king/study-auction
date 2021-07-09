@@ -11,17 +11,29 @@ class Id
 {
     private string $value;
 
+    /**
+     * Id constructor.
+     * @param string $value
+     */
     public function __construct(string $value)
     {
         Assert::uuid($value);
         $this->value = mb_strtolower($value);
     }
 
+    /**
+     * Generate id
+     * @return self
+     */
     public static function generate(): self
     {
         return new self(Uuid::uuid4()->toString());
     }
 
+    /**
+     * Return id value
+     * @return string
+     */
     public function getValue(): string
     {
         return $this->value;
