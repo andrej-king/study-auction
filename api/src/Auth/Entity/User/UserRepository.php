@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity\User;
 
+use DomainException;
+
 /**
  * Interface UserRepository
  */
@@ -26,6 +28,13 @@ interface UserRepository
      * @return User|null
      */
     public function findByConfirmToken(string $token): ?User;
+
+    /**
+     * @param Id $id
+     * @return User
+     * @throws DomainException
+     */
+    public function get(Id $id): User;
 
     /**
      * @param User $user

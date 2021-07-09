@@ -25,7 +25,7 @@ class JoinByNetworkTest extends TestCase
             $id = Id::generate(),
             $date = new DateTimeImmutable(),
             $email = new Email('email@app.test'),
-            $network = new NetworkIdentity('vk', '0000001')
+            $network = new NetworkIdentity('fb', '0000001')
         );
 
         self::assertEquals($id, $user->getId());

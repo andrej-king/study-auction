@@ -30,6 +30,7 @@ class NetworkIdentityTest extends TestCase
     public function testEmptyName(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        /** @noinspection PhpUnusedLocalVariableInspection */
         new NetworkIdentity($name = '', $identity = 'google-1');
     }
 
@@ -39,6 +40,7 @@ class NetworkIdentityTest extends TestCase
     public function testEmptyIdentity(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        /** @noinspection PhpUnusedLocalVariableInspection */
         new NetworkIdentity($name = 'google', $identity = '');
     }
 
@@ -47,10 +49,11 @@ class NetworkIdentityTest extends TestCase
      */
     public function testEqual(): void
     {
+        /** @noinspection PhpUnusedLocalVariableInspection */
         $network = new NetworkIdentity($name = 'google', $identity = 'google-1');
 
         self::assertTrue($network->isEqualTo(new NetworkIdentity($name, 'google-1')));
         self::assertFalse($network->isEqualTo(new NetworkIdentity($name, 'google-2')));
-        self::assertFalse($network->isEqualTo(new NetworkIdentity('vk', 'vk-1')));
+        self::assertFalse($network->isEqualTo(new NetworkIdentity('fb', 'fb-1')));
     }
 }

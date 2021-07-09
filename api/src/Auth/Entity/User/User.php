@@ -76,6 +76,22 @@ class User
     }
 
     /**
+     * Attach social network to user
+     * @param NetworkIdentity $identity
+     * @throws DomainException
+     */
+    public function attachNetwork(NetworkIdentity $identity): void
+    {
+        /** @var NetworkIdentity $existing */
+        foreach ($this->networks as $existing) {
+            if ($existing->isEqualTo($identity)) {
+                throw new DomainException('Network is already attached.');
+            }
+        }
+        $this->networks->append($identity);
+    }
+
+    /**
      * @return bool
      */
     public function isWait(): bool
