@@ -21,6 +21,7 @@ class Token
     public function __construct(string $value, DateTimeImmutable $expires)
     {
         Assert::uuid($value);
+        /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
         $this->value = mb_strtolower($value);
         $this->expires = $expires;
     }
@@ -72,7 +73,7 @@ class Token
      * @param DateTimeImmutable $date
      * @return bool
      */
-    private function isExpiredTo(DateTimeImmutable $date): bool
+    public function isExpiredTo(DateTimeImmutable $date): bool
     {
         return $this->expires <= $date;
     }

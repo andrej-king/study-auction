@@ -37,6 +37,14 @@ interface UserRepository
     public function get(Id $id): User;
 
     /**
+     * Get user by email
+     * @param Email $email
+     * @return User
+     * @throws DomainException
+     */
+    public function getByEmail(Email $email): User;
+
+    /**
      * @param User $user
      */
     public function add(User $user): void;

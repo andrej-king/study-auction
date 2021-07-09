@@ -17,6 +17,7 @@ class User
     private Status $status;
     private ?Token $joinConfirmToken = null;
     private ArrayObject $networks;
+    private ?Token $passwordResetToken = null;
 
     /**
      * User constructor.
@@ -92,6 +93,23 @@ class User
     }
 
     /**
+     * Will save token only if not yet exists
+     * @param Token             $token
+     * @param DateTimeImmutable $date
+     * @throws DomainException
+     */
+    public function requestPasswordReset(Token $token, DateTimeImmutable $date): void
+    {
+        if (!$this->isActive()) {
+            throw new DomainException('User is not active.');
+        }
+        if ($this->passwordResetToken !== null && !$this->passwordResetToken->isExpiredTo($date)) {
+            throw new DomainException('Resetting is already requested.');
+        }
+        $this->passwordResetToken = $token;
+    }
+
+    /**
      * @return bool
      */
     public function isWait(): bool
@@ -145,6 +163,14 @@ class User
     public function getJoinConfirmToken(): ?Token
     {
         return $this->joinConfirmToken;
+    }
+
+    /**
+     * @return Token|null
+     */
+    public function getPasswordResetToken(): ?Token
+    {
+        return $this->passwordResetToken;
     }
 
     /**
