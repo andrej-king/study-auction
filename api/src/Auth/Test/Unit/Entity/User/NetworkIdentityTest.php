@@ -26,30 +26,30 @@ class NetworkIdentityTest extends TestCase
 
     /**
      * Check behavior with empty identity name
+     * @noinspection PhpUnusedLocalVariableInspection
      */
     public function testEmptyName(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        /** @noinspection PhpUnusedLocalVariableInspection */
         new NetworkIdentity($name = '', $identity = 'google-1');
     }
 
     /**
      * Check behavior with empty identity id
+     * @noinspection PhpUnusedLocalVariableInspection
      */
     public function testEmptyIdentity(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        /** @noinspection PhpUnusedLocalVariableInspection */
         new NetworkIdentity($name = 'google', $identity = '');
     }
 
     /**
      * Check equal method
+     * @noinspection PhpUnusedLocalVariableInspection
      */
     public function testEqual(): void
     {
-        /** @noinspection PhpUnusedLocalVariableInspection */
         $network = new NetworkIdentity($name = 'google', $identity = 'google-1');
 
         self::assertTrue($network->isEqualTo(new NetworkIdentity($name, 'google-1')));

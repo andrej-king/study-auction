@@ -177,6 +177,7 @@ class User
      * Confirm and reset token
      * @param string            $token
      * @param DateTimeImmutable $date
+     * @throws DomainException
      */
     public function confirmJoin(string $token, DateTimeImmutable $date): void
     {

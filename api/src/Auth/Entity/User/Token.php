@@ -17,11 +17,11 @@ class Token
      * Token constructor.
      * @param string            $value
      * @param DateTimeImmutable $expires
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
     public function __construct(string $value, DateTimeImmutable $expires)
     {
         Assert::uuid($value);
-        /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
         $this->value = mb_strtolower($value);
         $this->expires = $expires;
     }
@@ -30,6 +30,7 @@ class Token
      * Validate token value
      * @param string            $value
      * @param DateTimeImmutable $date
+     * @throws DomainException
      */
     public function validate(string $value, DateTimeImmutable $date): void
     {

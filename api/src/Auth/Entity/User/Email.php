@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Auth\Entity\User;
 
+use InvalidArgumentException;
 use Webmozart\Assert\Assert;
 
 class Email
@@ -13,6 +14,8 @@ class Email
     /**
      * Email constructor.
      * @param string $value
+     * @throws InvalidArgumentException
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
     public function __construct(string $value)
     {

@@ -23,6 +23,7 @@ class NetworkIdentity
      * NetworkIdentity constructor.
      * @param string $network
      * @param string $identity
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
     public function __construct(string $network, string $identity)
     {

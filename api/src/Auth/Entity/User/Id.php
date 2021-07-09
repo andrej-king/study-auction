@@ -14,6 +14,7 @@ class Id
     /**
      * Id constructor.
      * @param string $value
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
      */
     public function __construct(string $value)
     {

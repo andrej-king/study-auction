@@ -27,6 +27,7 @@ class Handler
 
     /**
      * @param Command $command
+     * @throws DomainException
      */
     public function handle(Command $command): void
     {

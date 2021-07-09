@@ -24,6 +24,7 @@ class PasswordHasher
      * Hashing a password
      * @param string $password
      * @return string
+     * @throws RuntimeException
      */
     public function hash(string $password): string
     {

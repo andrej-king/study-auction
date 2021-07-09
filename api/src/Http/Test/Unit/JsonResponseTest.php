@@ -4,6 +4,7 @@ namespace App\Http\Test\Unit;
 
 use App\Http\JsonResponse;
 use Fig\Http\Message\StatusCodeInterface;
+use JsonException;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -11,6 +12,7 @@ class JsonResponseTest extends TestCase
 {
     /**
      * Check create status code
+     * @throws JsonException
      */
     public function testIntWithCode(): void
     {
@@ -25,6 +27,7 @@ class JsonResponseTest extends TestCase
      * @dataProvider getCases
      * @param mixed $source
      * @param mixed $expect
+     * @throws JsonException
      */
     public function testResponse($source, $expect): void
     {
