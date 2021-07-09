@@ -48,4 +48,6 @@ interface UserRepository
      * @param User $user
      */
     public function add(User $user): void;
+
+    public function findByPasswordResetToken(string $token): ?User;
 }
