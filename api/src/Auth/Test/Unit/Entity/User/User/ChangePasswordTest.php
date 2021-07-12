@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class ChangePasswordTest extends TestCase
 {
     /**
-     * Chech success change password
+     * Check success change password
      */
     public function testSuccess(): void
     {
