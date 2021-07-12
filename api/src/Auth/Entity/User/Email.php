@@ -32,4 +32,14 @@ class Email
     {
         return $this->value;
     }
+
+    /**
+     * Compare two emails
+     * @param self $other
+     * @return bool
+     */
+    public function isEqualTo(self $other): bool
+    {
+        return $this->value === $other->value;
+    }
 }

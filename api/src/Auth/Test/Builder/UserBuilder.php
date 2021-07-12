@@ -46,6 +46,17 @@ class UserBuilder
     }
 
     /**
+     * @param Email $email
+     * @return $this
+     */
+    public function withEmail(Email $email): self
+    {
+        $clone = clone $this;
+        $clone->email = $email;
+        return $clone;
+    }
+
+    /**
      * @param NetworkIdentity|null $identity
      * @return $this
      */

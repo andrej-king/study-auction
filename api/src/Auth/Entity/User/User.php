@@ -19,6 +19,8 @@ class User
     private ?Token $joinConfirmToken = null;
     private ArrayObject $networks;
     private ?Token $passwordResetToken = null;
+    private ?Email $newEmail = null;
+    private ?Token $newEmailToken = null;
 
     /**
      * User constructor.
@@ -144,6 +146,27 @@ class User
     }
 
     /**
+     * Request for change email
+     * @param Token             $token
+     * @param DateTimeImmutable $date
+     * @param Email             $email
+     */
+    public function requestEmailChanging(Token $token, DateTimeImmutable $date, Email $email): void
+    {
+        if (!$this->isActive()) {
+            throw new DomainException('User is not active.');
+        }
+        if ($this->email->isEqualTo($email)) {
+            throw new DomainException('Email is already same.');
+        }
+        if ($this->newEmailToken !== null && !$this->newEmailToken->isExpiredTo($date)) {
+            throw new DomainException('Changing is already requested.');
+        }
+        $this->newEmail = $email;
+        $this->newEmailToken = $token;
+    }
+
+    /**
      * @return bool
      */
     public function isWait(): bool
@@ -231,5 +254,21 @@ class User
     {
         /** @var NetworkIdentity[] */
         return $this->networks->getArrayCopy();
+    }
+
+    /**
+     * @return Email|null
+     */
+    public function getNewEmail(): ?Email
+    {
+        return $this->newEmail;
+    }
+
+    /**
+     * @return Token|null
+     */
+    public function getNewEmailToken(): ?Token
+    {
+        return $this->newEmailToken;
     }
 }
