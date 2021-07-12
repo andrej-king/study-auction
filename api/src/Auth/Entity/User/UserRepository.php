@@ -49,5 +49,15 @@ interface UserRepository
      */
     public function add(User $user): void;
 
+    /**
+     * @param string $token
+     * @return User|null
+     */
     public function findByPasswordResetToken(string $token): ?User;
+
+    /**
+     * @param string $token
+     * @return User|null
+     */
+    public function findByNewEmailToken(string $token): ?User;
 }

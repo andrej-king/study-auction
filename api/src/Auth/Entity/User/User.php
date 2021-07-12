@@ -167,6 +167,23 @@ class User
     }
 
     /**
+     * Confirm for change email
+     * @param string            $token
+     * @param DateTimeImmutable $date
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     */
+    public function confirmEmailChanging(string $token, DateTimeImmutable $date): void
+    {
+        if ($this->newEmail === null || $this->newEmailToken === null) {
+            throw new DomainException('Changing is not requested.');
+        }
+        $this->newEmailToken->validate($token, $date);
+        $this->email = $this->newEmail;
+        $this->newEmail = null;
+        $this->newEmailToken = null;
+    }
+
+    /**
      * @return bool
      */
     public function isWait(): bool
