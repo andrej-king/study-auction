@@ -31,6 +31,7 @@ class Handler
 
 
     /**
+     * Reset password confirm handler
      * @param Command $command
      * @throws DomainException
      */

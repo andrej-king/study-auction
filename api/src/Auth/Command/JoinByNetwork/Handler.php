@@ -26,6 +26,7 @@ class Handler
     }
 
     /**
+     * Join by network handler
      * @param Command $command
      * @throws DomainException
      */

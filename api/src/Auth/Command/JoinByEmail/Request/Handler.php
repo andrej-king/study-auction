@@ -46,6 +46,7 @@ class Handler
     }
 
     /**
+     * Join by email request handler
      * @param Command $command
      * @throws DomainException
      */

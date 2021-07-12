@@ -38,6 +38,7 @@ class Handler
     }
 
     /**
+     * Reset password request handler
      * @param Command $command
      */
     public function handle(Command $command): void

@@ -27,6 +27,7 @@ class Handler
     }
 
     /**
+     * Attach social network handler
      * @param Command $command
      * @throws DomainException
      */

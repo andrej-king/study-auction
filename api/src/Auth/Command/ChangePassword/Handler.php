@@ -28,6 +28,10 @@ class Handler
         $this->flusher = $flusher;
     }
 
+    /**
+     * Change password handler
+     * @param Command $command
+     */
     public function handle(Command $command): void
     {
         $user = $this->users->get(new Id($command->id));
