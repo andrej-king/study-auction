@@ -72,7 +72,7 @@ class ChangePasswordTest extends TestCase
     }
 
     /**
-     * Mock for password hasher
+     * Stub for password hasher
      * @param bool   $valid
      * @param string $hash
      * @return PasswordHasher
