@@ -21,6 +21,7 @@ class User
     private ?Token $passwordResetToken = null;
     private ?Email $newEmail = null;
     private ?Token $newEmailToken = null;
+    private Role $role;
 
     /**
      * User constructor.
@@ -35,6 +36,7 @@ class User
         $this->date = $date;
         $this->email = $email;
         $this->status = $status;
+        $this->role = Role::user();
         $this->networks = new ArrayObject();
     }
 
@@ -184,6 +186,14 @@ class User
     }
 
     /**
+     * @param Role $role
+     */
+    public function changeRole(Role $role): void
+    {
+        $this->role = $role;
+    }
+
+    /**
      * @return bool
      */
     public function isWait(): bool
@@ -287,5 +297,13 @@ class User
     public function getNewEmailToken(): ?Token
     {
         return $this->newEmailToken;
+    }
+
+    /**
+     * @return Role
+     */
+    public function getRole(): Role
+    {
+        return $this->role;
     }
 }
