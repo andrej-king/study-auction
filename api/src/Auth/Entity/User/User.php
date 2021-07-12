@@ -127,8 +127,8 @@ class User
     }
 
     /**
-     * @param string         $current
-     * @param string         $new
+     * @param string         $current current password
+     * @param string         $new     new password
      * @param PasswordHasher $hasher
      * @throws DomainException
      */
