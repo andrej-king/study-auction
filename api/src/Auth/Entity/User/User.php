@@ -194,6 +194,17 @@ class User
     }
 
     /**
+     * Check if user active
+     * @throws DomainException if user in active status
+     */
+    public function remove(): void
+    {
+        if (!$this->isWait()) {
+            throw new DomainException('Unable to remove active user.');
+        }
+    }
+
+    /**
      * @return bool
      */
     public function isWait(): bool

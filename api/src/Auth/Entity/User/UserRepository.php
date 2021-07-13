@@ -60,4 +60,6 @@ interface UserRepository
      * @return User|null
      */
     public function findByNewEmailToken(string $token): ?User;
+
+    public function remove(User $user): void;
 }
