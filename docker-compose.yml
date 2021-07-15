@@ -49,6 +49,7 @@ services:
         environment:
             APP_ENV: dev
             APP_DEBUG: 1
+            DB_URL: pgsql://app:secret@api-postgres:5432/app
         volumes:
             - ./api:/app
 
@@ -58,6 +59,7 @@ services:
             POSTGRES_USER: app
             POSTGRES_PASSWORD: secret
             POSTGRES_DB: app
+            DB_URL: pgsql://app:secret@api-postgres:5432/app
         volumes:
             - api-postgres:/var/lib/postgresql/data
         ports:
