@@ -32,7 +32,7 @@ return [
             $settings['dev_mode'],
             $settings['proxy_dir'],
             $settings['cache_dir'] ?
-                DoctrineProvider::wrap(new FilesystemAdapter('', 0, __DIR__ . '/../../var/cache/doctrine/proxy')) :
+                DoctrineProvider::wrap(new FilesystemAdapter('', 0, $settings['cache_dir'])) :
                 DoctrineProvider::wrap(new ArrayAdapter()),
             false
         );
