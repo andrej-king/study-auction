@@ -18,10 +18,10 @@ interface UserRepository
     public function hasByEmail(Email $email): bool;
 
     /**
-     * @param NetworkIdentity $identity
+     * @param Network $network
      * @return bool
      */
-    public function hasByNetwork(NetworkIdentity $identity): bool;
+    public function hasByNetwork(Network $network): bool;
 
     /**
      * @param string $token
