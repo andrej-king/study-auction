@@ -39,6 +39,7 @@ return [
 
         $config->setNamingStrategy(new UnderscoreNamingStrategy());
 
+        /** @psalm-suppress MixedArgumentTypeCoercion */
         return EntityManager::create(
             $settings['connection'],
             $config
