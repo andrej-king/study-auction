@@ -41,7 +41,7 @@ class Id
     }
 
     /**
-     * Get string id value
+     * Convert object to string
      *
      * @return string
      */
