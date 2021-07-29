@@ -75,7 +75,10 @@ return [
                 __DIR__ . '/../../src/Auth/Entity'
             ],
             'types' => [
-                Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class
+                Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class,
+                Auth\Entity\User\EmailType::NAME => Auth\Entity\User\EmailType::class,
+                Auth\Entity\User\RoleType::NAME => Auth\Entity\User\RoleType::class,
+                Auth\Entity\User\StatusType::NAME => Auth\Entity\User\StatusType::class,
             ],
         ],
     ],
