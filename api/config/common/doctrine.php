@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Auth;
 use Doctrine\Common\Cache\Psr6\DoctrineProvider;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
@@ -39,6 +40,17 @@ return [
 
         $config->setNamingStrategy(new UnderscoreNamingStrategy());
 
+        /**
+         * Registry new types for doctrine annotations
+         *
+         * @psalm-suppress ArgumentTypeCoercion
+         */
+        foreach ($settings['types'] as $name => $class) {
+            if (!Type::hasType($name)) {
+                Type::addType($name, $class);
+            }
+        }
+
         /** @psalm-suppress MixedArgumentTypeCoercion */
         return EntityManager::create(
             $settings['connection'],
@@ -61,6 +73,9 @@ return [
             ],
             'metadata_dirs' => [
                 __DIR__ . '/../../src/Auth/Entity'
+            ],
+            'types' => [
+                Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class
             ],
         ],
     ],
