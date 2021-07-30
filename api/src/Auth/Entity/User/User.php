@@ -12,6 +12,7 @@ use DomainException;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="auth_users")
  */
 class User
@@ -343,5 +344,25 @@ class User
     public function getRole(): Role
     {
         return $this->role;
+    }
+
+    /**
+     * If an empty token value is returned from the database, make it null
+     *
+     * @ORM\PostLoad
+     */
+    public function checkEmbeds(): void
+    {
+        if ($this->joinConfirmToken && $this->joinConfirmToken->isEmpty()) {
+            $this->joinConfirmToken = null;
+        }
+
+        if ($this->passwordResetToken && $this->passwordResetToken->isEmpty()) {
+            $this->passwordResetToken = null;
+        }
+
+        if ($this->newEmailToken && $this->newEmailToken->isEmpty()) {
+            $this->newEmailToken = null;
+        }
     }
 }

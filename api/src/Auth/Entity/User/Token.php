@@ -90,4 +90,13 @@ class Token
     {
         return $this->expires <= $date;
     }
+
+    /**
+     * Check if token value is empty
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return empty($this->value);
+    }
 }
