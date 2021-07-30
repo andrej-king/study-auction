@@ -95,7 +95,7 @@ class User
      * @param Id                $id
      * @param DateTimeImmutable $date
      * @param Email             $email
-     * @param Network           $identity
+     * @param Network           $network
      * @return self
      */
     public static function joinByNetwork(
@@ -111,7 +111,7 @@ class User
 
     /**
      * Attach social network to user
-     * @param Network $identity
+     * @param Network $network
      * @throws DomainException
      */
     public function attachNetwork(Network $network): void
