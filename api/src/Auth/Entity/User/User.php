@@ -50,6 +50,8 @@ class User
 
     /** @ORM\Column(type="auth_user_role", length=16) */
     private Role $role;
+
+    /** @ORM\OneToMany(targetEntity="UserNetworks", mappedBy="user", cascade={"all"}, orphanRemoval=true) */
     private Collection $networks;
 
     /**
@@ -106,7 +108,7 @@ class User
         Network $network
     ): self {
         $user = new self($id, $date, $email, Status::active());
-        $user->networks->add($network);
+        $user->networks->add(new UserNetwork($user, $network));
         return $user;
     }
 
@@ -117,13 +119,13 @@ class User
      */
     public function attachNetwork(Network $network): void
     {
-        /** @var Network $existing */
+        /** @var UserNetwork $existing */
         foreach ($this->networks as $existing) {
-            if ($existing->isEqualTo($network)) {
+            if ($existing->getNetwork()->isEqualTo($network)) {
                 throw new DomainException('Network is already attached.');
             }
         }
-        $this->networks->add($network);
+        $this->networks->add(new UserNetwork($this, $network));
     }
 
     /**
@@ -319,8 +321,13 @@ class User
      */
     public function getNetworks(): array
     {
-        /** @var Network[] */
-        return $this->networks->toArray();
+        /**
+         * @var Network[]
+         * @psalm-suppress MixedArgumentTypeCoercion
+         */
+        return $this->networks->map(static function (UserNetwork $network) {
+            return $network->getNetwork();
+        })->toArray();
     }
 
     /**
