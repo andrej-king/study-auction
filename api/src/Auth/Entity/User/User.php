@@ -51,7 +51,7 @@ class User
     /** @ORM\Column(type="auth_user_role", length=16) */
     private Role $role;
 
-    /** @ORM\OneToMany(targetEntity="UserNetworks", mappedBy="user", cascade={"all"}, orphanRemoval=true) */
+    /** @ORM\OneToMany(targetEntity="UserNetwork", mappedBy="user", cascade={"all"}, orphanRemoval=true) */
     private Collection $networks;
 
     /**
