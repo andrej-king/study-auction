@@ -4,6 +4,9 @@
 # REGISTRY=apedchenko IMAGE_TAG=master-1 make push
 # HOST=deploy@ip PORT=22 REGISTRY=apedchenko IMAGE_TAG=master-1 BUILD_NUMBER=1  make deploy
 #init: docker-down-clear api-clear docker-pull docker-build docker-up api-init
+
+# add rules: sudo chown $USER:$USER api/src/ -R
+
 init: docker-down-clear api-clear docker-build docker-up api-init
 up: docker-up
 down: docker-down
