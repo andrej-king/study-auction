@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use App\Auth;
 use Doctrine\Common\Cache\Psr6\DoctrineProvider;
+use Doctrine\Common\EventManager;
+use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,6 +25,7 @@ return [
          *     proxy_dir:string,
          *     cache_dir:?string,
          *     types:array<string,string>,
+         *     subscribers:string[],
          *     connection:array
          * } $settings
          */
@@ -51,10 +54,19 @@ return [
             }
         }
 
+        $eventManager = new EventManager();
+
+        foreach ($settings['subscribers'] as $name) {
+            /** @var EventSubscriber $subscriber */
+            $subscriber = $container->get($name);
+            $eventManager->addEventSubscriber($subscriber);
+        }
+
         /** @psalm-suppress MixedArgumentTypeCoercion */
         return EntityManager::create(
             $settings['connection'],
-            $config
+            $config,
+            $eventManager
         );
     },
 
@@ -71,6 +83,7 @@ return [
                 'dbname'   => getenv('DB_NAME'),
                 'charset'  => 'utf-8'
             ],
+            'subscribers' => [],
             'metadata_dirs' => [
                 __DIR__ . '/../../src/Auth/Entity'
             ],
