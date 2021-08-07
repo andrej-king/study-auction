@@ -11,9 +11,10 @@ init: docker-down-clear api-clear docker-build docker-up api-init
 up: docker-up
 down: docker-down
 restart: docker-down docker-up
-check: lint analyze test
+check: lint analyze validate-schema test
 lint: api-lint
 analyze: api-analyze
+validate-schema: api-validate-schema
 test: api-test
 test-coverage: api-test-coverage
 test-unit: api-test-unit
@@ -46,6 +47,12 @@ api-permissions:
 
 api-composer-install:
 	docker-compose run --rm api-php-cli composer install
+
+api-migrations:
+	docker-compose run --rm api-php-cli composer app migrations:migrate
+
+api-validate-schema:
+	docker-compose run --rm api-php-cli composer app orm:validate-schema
 
 api-lint:
 	docker-compose run --rm api-php-cli composer lint # phplint - syntax check validator

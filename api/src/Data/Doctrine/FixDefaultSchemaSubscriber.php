@@ -9,6 +9,9 @@ use Doctrine\DBAL\Schema\PostgreSqlSchemaManager;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
 use Doctrine\ORM\Tools\ToolEvents;
 
+/**
+ * For remove create default "public" schema in migrations file
+ */
 class FixDefaultSchemaSubscriber implements EventSubscriber
 {
     public function getSubscribedEvents(): array
