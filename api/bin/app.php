@@ -36,5 +36,6 @@ foreach ($commands as $name) {
 // docker-compose run --rm api-php-cli composer app
 // docker-compose run --rm api-php-cli composer app hello
 // docker-compose run --rm api-php-cli composer app migrations:diff // generate migration
+// docker-compose run --rm api-php-cli composer app migrations:migrate // set migrations
 
 $cli->run();
