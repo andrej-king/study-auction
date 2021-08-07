@@ -35,5 +35,6 @@ foreach ($commands as $name) {
 // run console commands with added script in composer.json:
 // docker-compose run --rm api-php-cli composer app
 // docker-compose run --rm api-php-cli composer app hello
+// docker-compose run --rm api-php-cli composer app migrations:diff // generate migration
 
 $cli->run();
