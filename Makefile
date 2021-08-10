@@ -40,7 +40,7 @@ docker-build:
 api-clear:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/*' # delete all items except with '.' in start
 
-api-init: api-permissions api-composer-install api-wait-db api-migrations
+api-init: api-permissions api-composer-install api-wait-db api-migrations api-fixtures
 
 api-permissions:
 	docker run --rm -v ${PWD}/api:/app -w /app alpine chmod 777 var
@@ -48,11 +48,17 @@ api-permissions:
 api-composer-install:
 	docker-compose run --rm api-php-cli composer install
 
+# check if db container is up (then can be work with data in db)
 api-wait-db:
 	docker-compose run --rm api-php-cli wait-for-it api-postgres:5432 -t 30
 
+# create migrations for db
 api-migrations:
 	docker-compose run --rm api-php-cli composer app migrations:migrate --no-interaction
+
+# load fake data in local db
+api-fixtures:
+	docker-compose run --rm api-php-cli composer app fixtures:load
 
 api-validate-schema:
 	docker-compose run --rm api-php-cli composer app orm:validate-schema
