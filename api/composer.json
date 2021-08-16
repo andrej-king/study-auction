@@ -16,6 +16,7 @@
         "ramsey/uuid": "^4.1",
         "slim/psr7": "^0.6.0",
         "slim/slim": "^4.3",
+        "swiftmailer/swiftmailer": "^6.2",
         "symfony/cache": "^5.3",
         "symfony/console": "^5.3",
         "webmozart/assert": "^1.10"
