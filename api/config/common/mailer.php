@@ -14,6 +14,7 @@ return [
          *     user:string,
          *     password:string,
          *     encryption:string,
+         *     from:array
          * } $config
          */
         $config = $container->get('config')['mailer'];
@@ -33,7 +34,7 @@ return [
             'user'       => getenv('MAILER_USER'),
             'password'   => getenv('MAILER_PASSWORD'),
             'encryption' => getenv('MAILER_ENCRYPTION'),
-            'from'       => getenv('MAILER_FROM_EMAIL'),
+            'from'       => [(string)getenv('MAILER_FROM_EMAIL') => 'Auction'],
         ],
     ],
 ];
