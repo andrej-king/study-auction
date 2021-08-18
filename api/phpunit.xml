@@ -11,6 +11,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory>src/Auth/Test/Unit</directory>
+            <directory>src/Frontend/Test/Unit</directory>
             <directory>src/Http/Test/Unit</directory>
         </testsuite>
         <testsuite name="functional">
@@ -24,6 +25,7 @@
         </include>
         <exclude>
             <directory>src/Auth/Test</directory>
+            <directory>src/Frontend/Test</directory>
             <directory>src/Http/Test</directory>
         </exclude>
     </coverage>
