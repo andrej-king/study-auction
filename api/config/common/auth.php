@@ -22,6 +22,12 @@ return [
         /** @var Swift_Mailer $mailer */
         $mailer = $container->get(Swift_Mailer::class);
 
-        return new JoinConfirmationSender($mailer);
+        /**
+         * @psalm-suppress MixedArrayAccess
+         * @psalm-var array{url:string} $frontendConfig
+         */
+        $frontendConfig = $container->get('config')['frontend'];
+
+        return new JoinConfirmationSender($mailer, $frontendConfig['url']);
     },
 ];
