@@ -6,7 +6,6 @@ namespace App\Auth\Service;
 
 use App\Auth\Entity\User\Email;
 use App\Auth\Entity\User\Token;
-use App\Frontend\FrontendUrlGenerator;
 use RuntimeException;
 use Swift_Mailer;
 use Swift_Message;
@@ -15,6 +14,9 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
+/**
+ * Send email link (include confirm token)
+ */
 class JoinConfirmationSender
 {
     private Swift_Mailer $mailer;
