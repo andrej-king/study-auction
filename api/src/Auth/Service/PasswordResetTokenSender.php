@@ -11,6 +11,9 @@ use Swift_Message;
 use Twig\Environment;
 use Twig\Error\{LoaderError, RuntimeError, SyntaxError};
 
+/**
+ * Send link with token for confirm password reset
+ */
 class PasswordResetTokenSender
 {
     private Swift_Mailer $mailer;
