@@ -18,6 +18,7 @@ class MailerCheckCommand extends Command
     private JoinConfirmationSender $sender;
 
     /**
+     * Can be change type sender (for example to NewEmailConfirmTokenSender or PasswordResetTokenSender)
      * @param JoinConfirmationSender $sender
      */
     public function __construct(JoinConfirmationSender $sender)
