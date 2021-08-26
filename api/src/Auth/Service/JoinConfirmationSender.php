@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Auth\Service;
 
-use App\Auth\Entity\User\Email;
-use App\Auth\Entity\User\Token;
+use App\Auth\Entity\User\{Email, Token};
 use RuntimeException;
 use Swift_Mailer;
 use Swift_Message;
 use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
+use Twig\Error\{LoaderError, RuntimeError, SyntaxError};
 
 /**
  * Send email link (include confirm token)
