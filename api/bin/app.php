@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+/** Init sentry for send errors in external logger panel */
 if (getenv('SENTRY_DSN')) {
     Sentry\init(['dsn' => getenv('SENTRY_DSN')]);
 }
@@ -20,6 +21,7 @@ $container = require __DIR__ . '/../config/container.php';
 
 $cli = new Application('Console');
 
+/** Turn off catch exceptions from Symfony and send it upper */
 if (getenv('SENTRY_DSN')) {
     $cli->setCatchExceptions(false);
 }

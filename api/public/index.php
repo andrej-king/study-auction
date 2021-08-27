@@ -9,6 +9,7 @@ http_response_code(500); // default status
 
 require __DIR__ . '/../vendor/autoload.php';
 
+/** Init sentry for send errors in external logger panel */
 if (getenv('SENTRY_DSN')) {
     Sentry\init(['dsn' => getenv('SENTRY_DSN')]);
 }
