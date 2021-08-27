@@ -38,7 +38,7 @@ docker-build:
 	docker-compose build #--pull
 
 api-clear:
-	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/cache* var/log/*' # delete all items except with '.' in start
+	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/cache/* var/log/*' # delete all items except with '.' in start
 
 api-init: api-permissions api-composer-install api-wait-db api-migrations api-fixtures
 
