@@ -12,7 +12,7 @@ use Throwable;
 use function Sentry\captureException;
 
 /**
- * Capture errors in sentry
+ * Capture errors in sentry.io
  */
 class SentryDecorator implements ErrorHandlerInterface
 {
