@@ -11,6 +11,9 @@ use Throwable;
 
 use function Sentry\captureException;
 
+/**
+ * Capture errors in sentry
+ */
 class SentryDecorator implements ErrorHandlerInterface
 {
     private ErrorHandlerInterface $next;
