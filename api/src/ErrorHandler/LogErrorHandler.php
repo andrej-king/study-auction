@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\ErrorHandler;
 
-use Psr\Log\LoggerInterface;
 use Slim\Handlers\ErrorHandler;
 
 /**
@@ -12,6 +11,9 @@ use Slim\Handlers\ErrorHandler;
  */
 class LogErrorHandler extends ErrorHandler
 {
+    /**
+     * Set what data to write to logs
+     */
     protected function writeToErrorLog(): void
     {
         $this->logger->error($this->exception->getMessage(), [
