@@ -65,7 +65,7 @@ api-validate-schema:
 
 api-lint:
 	docker-compose run --rm api-php-cli composer lint # phplint - syntax check validator
-	docker-compose run --rm api-php-cli composer cs-check # code sniffer - code style validator
+	docker-compose run --rm api-php-cli composer cs-check # php_codesniffer - code style validator
 
 api-analyze:
 	docker-compose run --rm api-php-cli composer psalm -- --no-diff # static analysis tool for php without cache
