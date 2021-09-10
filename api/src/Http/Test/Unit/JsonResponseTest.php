@@ -3,7 +3,6 @@
 namespace App\Http\Test\Unit;
 
 use App\Http\JsonResponse;
-use Fig\Http\Message\StatusCodeInterface;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -16,11 +15,11 @@ class JsonResponseTest extends TestCase
      */
     public function testIntWithCode(): void
     {
-        $response = new JsonResponse(0, StatusCodeInterface::STATUS_CREATED); // 201
+        $response = new JsonResponse(0, 201); // STATUS_CREATED
 
         self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
         self::assertEquals('0', $response->getBody()->getContents());
-        self::assertEquals(StatusCodeInterface::STATUS_CREATED, $response->getStatusCode());
+        self::assertEquals(201, $response->getStatusCode()); // STATUS_CREATED
     }
 
     /**
@@ -35,7 +34,7 @@ class JsonResponseTest extends TestCase
 
         self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
         self::assertEquals($expect, $response->getBody()->getContents());
-        self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode()); // 200
+        self::assertEquals(200, $response->getStatusCode()); // STATUS_OK
     }
 
 

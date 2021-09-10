@@ -9,7 +9,9 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 use Slim\Psr7\Factory\ServerRequestFactory;
-
+/**
+ * Require "StatusCodeInterface" from package "fig/http-message-util" for check response status
+ */
 class WebTestCase extends TestCase
 {
     protected static function json(string $method, string $path, array $body = []): ServerRequestInterface

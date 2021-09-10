@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http;
 
-use Fig\Http\Message\StatusCodeInterface;
 use JsonException;
 use Slim\Psr7\Factory\StreamFactory;
 use Slim\Psr7\Headers;
@@ -16,10 +15,10 @@ class JsonResponse extends Response
     /**
      * JsonResponse constructor.
      * @param mixed $data
-     * @param int   $status default 200
+     * @param int   $status default STATUS_OK
      * @throws JsonException
      */
-    public function __construct($data, int $status = StatusCodeInterface::STATUS_OK)
+    public function __construct($data, int $status = 200)
     {
         parent::__construct(
             $status,

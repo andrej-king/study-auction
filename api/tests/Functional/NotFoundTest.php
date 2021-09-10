@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Test\Functional;
 
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
-use Fig\Http\Message\StatusCodeInterface;
 
 class NotFoundTest extends WebTestCase
 {
@@ -15,7 +14,7 @@ class NotFoundTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('GET', '/not-found'));
 
-        self::assertEquals(StatusCodeInterface::STATUS_NOT_FOUND, $response->getStatusCode()); // 404
+        self::assertEquals(404, $response->getStatusCode()); // STATUS_NOT_FOUND
         self::assertJson($body = (string)$response->getBody());
 
         $data = Json::decode($body);
