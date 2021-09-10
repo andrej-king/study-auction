@@ -33,7 +33,7 @@ class RequestTest extends WebTestCase
         ]));
 
         self::assertEquals(201, $response->getStatusCode()); // STATUS_CREATED
-        self::assertEquals('{}', (string)$response->getBody());
+        self::assertEquals('', (string)$response->getBody());
     }
 
     /**
