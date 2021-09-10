@@ -16,7 +16,7 @@ class JsonResponse extends Response
     /**
      * JsonResponse constructor.
      * @param mixed $data
-     * @param int   $status
+     * @param int   $status default 200
      * @throws JsonException
      */
     public function __construct($data, int $status = StatusCodeInterface::STATUS_OK)

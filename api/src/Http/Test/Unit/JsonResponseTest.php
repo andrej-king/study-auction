@@ -16,7 +16,7 @@ class JsonResponseTest extends TestCase
      */
     public function testIntWithCode(): void
     {
-        $response = new JsonResponse(0, StatusCodeInterface::STATUS_CREATED);
+        $response = new JsonResponse(0, StatusCodeInterface::STATUS_CREATED); // 201
 
         self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
         self::assertEquals('0', $response->getBody()->getContents());
@@ -35,7 +35,7 @@ class JsonResponseTest extends TestCase
 
         self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
         self::assertEquals($expect, $response->getBody()->getContents());
-        self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode()); // 200
     }
 
 

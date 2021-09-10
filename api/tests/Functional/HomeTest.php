@@ -12,7 +12,7 @@ class HomeTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('POST', '/'));
 
-        self::assertEquals(StatusCodeInterface::STATUS_METHOD_NOT_ALLOWED, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_METHOD_NOT_ALLOWED, $response->getStatusCode()); // 405
     }
 
 
@@ -20,7 +20,7 @@ class HomeTest extends WebTestCase
     {
         $response = $this->app()->handle(self::json('GET', '/'));
 
-        self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode());
+        self::assertEquals(StatusCodeInterface::STATUS_OK, $response->getStatusCode()); // 200
         self::assertEquals('application/json', $response->getHeaderLine('Content-Type'));
         self::assertEquals('{}', (string)$response->getBody());
     }
