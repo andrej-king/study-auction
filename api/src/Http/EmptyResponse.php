@@ -17,6 +17,7 @@ class EmptyResponse extends Response
      */
     public function __construct(int $status = 204)
     {
+        // rb - read only, force enable binary mode
         parent::__construct(
             $status,
             null,
