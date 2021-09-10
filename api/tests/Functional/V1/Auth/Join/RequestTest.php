@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Test\Functional\V1\Auth\Join;
+
 use Test\Functional\Json;
 use Test\Functional\WebTestCase;
 
@@ -25,10 +27,10 @@ class RequestTest extends WebTestCase
      */
     public function testSuccess(): void
     {
-        $response = $this->app()->handle(self::json('POST', '/v1/auth/join'), [
+        $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'new-user@app.test',
             'password' => 'new-password',
-        ]);
+        ]));
 
         self::assertEquals(201, $response->getStatusCode()); // STATUS_CREATED
         self::assertEquals('{}', (string)$response->getBody());
@@ -39,10 +41,10 @@ class RequestTest extends WebTestCase
      */
     public function testExisting(): void
     {
-        $response = $this->app()->handle(self::json('POST', '/v1/auth/join'), [
+        $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'user@app.test',
             'password' => 'new-password',
-        ]);
+        ]));
 
         self::assertEquals(409, $response->getStatusCode()); // STATUS_CONFLICT
         self::assertJson($body = (string)$response->getBody());
@@ -64,10 +66,10 @@ class RequestTest extends WebTestCase
 
     public function testNotValid(): void
     {
-        $response = $this->app()->handle(self::json('POST', '/v1/auth/join'), [
+        $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'not-email',
             'password' => '',
-        ]);
+        ]));
 
         self::assertEquals(500, $response->getStatusCode()); // STATUS_INTERNAL_SERVER_ERROR
     }
