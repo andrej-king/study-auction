@@ -69,7 +69,6 @@ class WebTestCase extends TestCase
     protected function app(): App
     {
         if ($this->app === null) {
-            /** @var App */
             $this->app = (require __DIR__ . '/../../config/app.php')($this->container());
         }
         return $this->app;
