@@ -22,6 +22,7 @@ class WebTestCase extends TestCase
 {
     // for caching app and don't require each time
     private ?App $app = null;
+    private ?MailerClient $mailer = null;
 
     // will call it after each test call
     protected function tearDown(): void
@@ -72,6 +73,14 @@ class WebTestCase extends TestCase
             $this->app = (require __DIR__ . '/../../config/app.php')($this->container());
         }
         return $this->app;
+    }
+
+    protected function mailer(): MailerClient
+    {
+        if ($this->mailer === null) {
+            $this->mailer = new MailerClient();
+        }
+        return $this->mailer;
     }
 
     private function container(): ContainerInterface
