@@ -20,6 +20,16 @@ use Slim\Psr7\Factory\ServerRequestFactory;
  */
 class WebTestCase extends TestCase
 {
+    // for caching app and don't require each time
+    private ?App $app = null;
+
+    // will call it after each test call
+    protected function tearDown(): void
+    {
+        $this->app = null;
+        parent::tearDown();
+    }
+
     protected static function json(string $method, string $path, array $body = []): ServerRequestInterface
     {
         $request = self::request($method, $path)
@@ -35,7 +45,7 @@ class WebTestCase extends TestCase
     }
 
     /**
-     * Load special fixtures
+     * Load special fixtures by request
      *
      * @param array<string|int,string> $fixtures
      */
@@ -58,8 +68,11 @@ class WebTestCase extends TestCase
 
     protected function app(): App
     {
-        /** @var App */
-        return (require __DIR__ . '/../../config/app.php')($this->container());
+        if ($this->app === null) {
+            /** @var App */
+            $this->app = (require __DIR__ . '/../../config/app.php')($this->container());
+        }
+        return $this->app;
     }
 
     private function container(): ContainerInterface
