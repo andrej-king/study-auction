@@ -13,6 +13,18 @@ use Test\Functional\WebTestCase;
 class RequestTest extends WebTestCase
 {
     /**
+     * Automatic call this before each test
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loadFixtures([
+            RequestFixture::class,
+        ]);
+    }
+
+    /**
      * Check method not allowed with GET method
      */
     public function testMethod(): void
@@ -42,7 +54,7 @@ class RequestTest extends WebTestCase
     public function testExisting(): void
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
-            'email' => 'user@app.test',
+            'email' => 'existing@app.test',
             'password' => 'new-password',
         ]));
 
