@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Auth\Console;
+namespace App\Console;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;

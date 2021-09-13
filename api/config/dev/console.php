@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Auth\Console\FixturesLoadCommand;
+use App\Console\FixturesLoadCommand;
 use Doctrine\Migrations;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\Command\SchemaTool;
