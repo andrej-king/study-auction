@@ -19,14 +19,14 @@ use Ramsey\Uuid\Uuid;
  */
 class RequestFixture extends AbstractFixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $user = User::requestJoinByEmail(
             Id::generate(),
             $date = new DateTimeImmutable('-30 days'),
             new Email('existing@app.test'),
             'password-hash',
-            new Token($value = Uuid::uuid4()->toString(), $date->modify('+1 day'))
+            new Token(Uuid::uuid4()->toString(), $date->modify('+1 day'))
         );
 
         $manager->persist($user);

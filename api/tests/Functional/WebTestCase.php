@@ -44,7 +44,7 @@ class WebTestCase extends TestCase
         /** @var ContainerInterface $container */
         $container = $this->app()->getContainer();
         $loader = new Loader();
-        foreach ($fixtures as $name => $class) {
+        foreach ($fixtures as $class) { // $name => $class
             /** @var AbstractFixture $fixture */
             $fixture = $container->get($class);
             $loader->addFixture($fixture);
