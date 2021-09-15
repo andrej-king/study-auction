@@ -12,6 +12,8 @@ use JsonException;
 class Json
 {
     /**
+     * Decode JSON in array
+     *
      * @param string $data
      *
      * @return array

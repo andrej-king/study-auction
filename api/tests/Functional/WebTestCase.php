@@ -24,13 +24,27 @@ class WebTestCase extends TestCase
     private ?App $app = null;
     private ?MailerClient $mailer = null;
 
-    // will call it after each test call
+    /**
+     * Will call it after each test call
+     *
+     * @return void
+     */
     protected function tearDown(): void
     {
         $this->app = null;
         parent::tearDown();
     }
 
+    /**
+     * Send request in JSON with params
+     *
+     * @param string $method
+     * @param string $path
+     * @param array  $body
+     *
+     * @return ServerRequestInterface
+     * @throws \JsonException
+     */
     protected static function json(string $method, string $path, array $body = []): ServerRequestInterface
     {
         $request = self::request($method, $path)
@@ -40,15 +54,25 @@ class WebTestCase extends TestCase
         return $request;
     }
 
+    /**
+     * Send request
+     *
+     * @param string $method
+     * @param string $path
+     *
+     * @return ServerRequestInterface
+     */
     protected static function request(string $method, string $path): ServerRequestInterface
     {
         return (new ServerRequestFactory())->createServerRequest($method, $path);
     }
 
     /**
-     * Load special fixtures by request
+     * Load special fixtures by request.
      *
      * @param array<string|int,string> $fixtures
+     *
+     * @return void
      */
     protected function loadFixtures(array $fixtures): void
     {
@@ -67,6 +91,12 @@ class WebTestCase extends TestCase
         $executor->execute($loader->getFixtures());
     }
 
+
+    /**
+     * Create single app object.
+     *
+     * @return App
+     */
     protected function app(): App
     {
         if ($this->app === null) {
@@ -75,6 +105,11 @@ class WebTestCase extends TestCase
         return $this->app;
     }
 
+    /**
+     * Create single MailerClient object.
+     *
+     * @return MailerClient
+     */
     protected function mailer(): MailerClient
     {
         if ($this->mailer === null) {
@@ -83,6 +118,11 @@ class WebTestCase extends TestCase
         return $this->mailer;
     }
 
+    /**
+     * Get container with configs.
+     *
+     * @return ContainerInterface
+     */
     private function container(): ContainerInterface
     {
         /** @var ContainerInterface */

@@ -10,6 +10,9 @@ class NotFoundTest extends WebTestCase
 {
     use ArraySubsetAsserts;
 
+    /**
+     * Check answer from non-existent page.
+     */
     public function testNotFound(): void
     {
         $response = $this->app()->handle(self::json('GET', '/not-found'));
