@@ -6,9 +6,11 @@ use App\Http\Middleware;
 use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
 
+/**
+ * Connect middlewares with desc order(ErrorMiddleware should be last).
+ */
 return static function (App $app): void {
-    // connect middlewares with desc order (ErrorMiddleware should be last)
-    $app->add(Middleware\ClearEmptyInput::class);
+    $app->add(Middleware\ClearEmptyInput::class); // Strip whitespace and empty files
     $app->addBodyParsingMiddleware();
     $app->add(ErrorMiddleware::class);
 };
