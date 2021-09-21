@@ -33,7 +33,7 @@ class RequestAction implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         /**
-         * @psalm-var array{email:?string, password:?string} $data
+         * @psalm-var array{'email':?string,'password':?string} $data
          */
         $data = $request->getParsedBody();
 
