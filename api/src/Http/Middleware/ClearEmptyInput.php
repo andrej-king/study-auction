@@ -59,6 +59,7 @@ class ClearEmptyInput implements MiddlewareInterface
 
     /**
      * Filter for files
+     * Clear empty files
      *
      * @param array $items
      *
