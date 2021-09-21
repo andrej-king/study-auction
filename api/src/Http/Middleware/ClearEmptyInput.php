@@ -13,6 +13,12 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class ClearEmptyInput implements MiddlewareInterface
 {
+    /**
+     * @param ServerRequestInterface  $request data for filter
+     * @param RequestHandlerInterface $handler handler (next action)
+     *
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $request = $request
