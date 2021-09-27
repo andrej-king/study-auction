@@ -11,6 +11,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ * Handler for join by email request
+ */
 class RequestAction implements RequestHandlerInterface
 {
     private Handler $handler;

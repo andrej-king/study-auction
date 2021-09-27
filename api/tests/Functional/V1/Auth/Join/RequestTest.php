@@ -82,6 +82,9 @@ class RequestTest extends WebTestCase
         self::assertEquals(500, $response->getStatusCode()); // STATUS_INTERNAL_SERVER_ERROR
     }
 
+    /**
+     * Check answer, if send email with invalid form
+     */
     public function testNotValid(): void
     {
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
