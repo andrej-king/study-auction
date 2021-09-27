@@ -11,6 +11,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ * Filter Domain Exceptions
+ */
 class DomainExceptionHandler implements MiddlewareInterface
 {
     /**
