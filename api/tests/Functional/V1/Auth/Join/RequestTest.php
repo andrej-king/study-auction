@@ -77,9 +77,20 @@ class RequestTest extends WebTestCase
      */
     public function testEmpty(): void
     {
+        // Made ignore when start test (means this check will be finish later)
+        $this->markTestIncomplete('Waiting for validation.');
+
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join'));
 
-        self::assertEquals(500, $response->getStatusCode()); // STATUS_INTERNAL_SERVER_ERROR
+        self::assertEquals(422, $response->getStatusCode()); // STATUS_UNPROCESSABLE_ENTITY
+        self::assertJson($body = (string)$response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'This value should not be blank.',
+                'password' => 'This value should not be blank.',
+            ],
+        ], Json::decode($body));
     }
 
     /**
@@ -87,11 +98,22 @@ class RequestTest extends WebTestCase
      */
     public function testNotValid(): void
     {
+        // Made ignore when start test (means this check will be finish later)
+        $this->markTestIncomplete('Waiting for validation.');
+
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'not-email',
             'password' => '',
         ]));
 
-        self::assertEquals(500, $response->getStatusCode()); // STATUS_INTERNAL_SERVER_ERROR
+        self::assertEquals(422, $response->getStatusCode()); // STATUS_UNPROCESSABLE_ENTITY
+        self::assertJson($body = (string)$response->getBody());
+
+        self::assertEquals([
+            'errors' => [
+                'email' => 'This value is not a valid email address.',
+                'password' => 'This value should not be blank.',
+            ],
+        ], Json::decode($body));
     }
 }
