@@ -77,9 +77,6 @@ class RequestTest extends WebTestCase
      */
     public function testEmpty(): void
     {
-        // Made ignore when start test (means this check will be finish later)
-//        $this->markTestIncomplete('Waiting for validation.');
-
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join'));
 
         self::assertEquals(422, $response->getStatusCode()); // STATUS_UNPROCESSABLE_ENTITY
@@ -98,9 +95,6 @@ class RequestTest extends WebTestCase
      */
     public function testNotValid(): void
     {
-        // Made ignore when start test (means this check will be finish later)
-//        $this->markTestIncomplete('Waiting for validation.');
-
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'not-email',
             'password' => '',

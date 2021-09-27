@@ -70,9 +70,6 @@ class ConfirmTest extends WebTestCase
      */
     public function testEmpty(): void
     {
-        // Made ignore when start test (means this check will be finish later)
-//        $this->markTestIncomplete('Waiting for validation.');
-
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join/confirm', []));
 
         self::assertEquals(422, $response->getStatusCode()); // STATUS_UNPROCESSABLE_ENTITY
