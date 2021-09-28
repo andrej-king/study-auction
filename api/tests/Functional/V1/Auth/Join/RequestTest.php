@@ -13,7 +13,7 @@ use Test\Functional\WebTestCase;
 class RequestTest extends WebTestCase
 {
     /**
-     * Automatic call this before each test
+     * Automatic call this before each test.
      */
     public function setUp(): void
     {
@@ -25,7 +25,7 @@ class RequestTest extends WebTestCase
     }
 
     /**
-     * Check method not allowed with GET method
+     * Check method not allowed with GET method.
      */
     public function testMethod(): void
     {
@@ -35,7 +35,7 @@ class RequestTest extends WebTestCase
     }
 
     /**
-     * Check answer if success sent method
+     * Check answer if success sent method.
      */
     public function testSuccess(): void
     {
@@ -55,7 +55,7 @@ class RequestTest extends WebTestCase
     }
 
     /**
-     * Check response if user already existing
+     * Check response if user already existing.
      */
     public function testExisting(): void
     {
@@ -73,7 +73,7 @@ class RequestTest extends WebTestCase
     }
 
     /**
-     * Check answer if send request with empty body
+     * Check answer if send request with empty body.
      */
     public function testEmpty(): void
     {
@@ -91,7 +91,7 @@ class RequestTest extends WebTestCase
     }
 
     /**
-     * Check answer, if send email with invalid form
+     * Check answer, if send email with invalid form.
      */
     public function testNotValid(): void
     {
@@ -109,5 +109,28 @@ class RequestTest extends WebTestCase
                 'password' => 'This value should not be blank.',
             ],
         ], Json::decode($body));
+    }
+
+    /**
+     * Check behavior if request for not exists lang.
+     */
+    public function testNotValidLang(): void
+    {
+        $this->markTestIncomplete('Waiting for translation.');
+
+        $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
+            'email' => 'not-email',
+            'password' => '',
+        ])->withHeader('Accept-Language', 'es;q=0.9, ru;q=0.8, *;q=0.5'));
+
+        self::assertEquals(422, $response->getStatusCode());
+        self::assertJson($body = (string)$response->getBody());
+
+        $data = Json::decode($body);
+
+        self::assertEquals([
+            'errors' => 'Значение адреса электронной почты недопустимо.',
+            'password' => 'Значение не должно быть пустым.',
+        ], $data);
     }
 }

@@ -11,6 +11,7 @@ Accept: application/json
 
 POST http://localhost:8081/v1/auth/join
 Accept: application/json
+Accept-Language: en
 Content-Type: application/json
 
 {
