@@ -8,6 +8,8 @@ use App\Auth\Command\JoinByEmail\Confirm\Command;
 use App\Auth\Command\JoinByEmail\Confirm\Handler;
 use App\Http\EmptyResponse;
 use App\Http\JsonResponse;
+use App\Http\Validator\ValidationException;
+use App\Http\Validator\Validator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -15,22 +17,31 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Handler for join by email confirm
+ * Class for work with confirm action in "join by email confirm"
  */
 class ConfirmAction implements RequestHandlerInterface
 {
     private Handler $handler;
-    private ValidatorInterface $validator;
+    private Validator $validator;
 
     /**
-     * @param Handler $handler
+     * @param Handler   $handler
+     * @param Validator $validator
      */
-    public function __construct(Handler $handler, ValidatorInterface $validator)
+    public function __construct(Handler $handler, Validator $validator)
     {
         $this->handler = $handler;
         $this->validator = $validator;
     }
 
+    /**
+     * Handler for join by email confirm
+     *
+     * @param ServerRequestInterface $request
+     *
+     * @return ResponseInterface
+     * @throws \JsonException
+     */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         /**
@@ -41,13 +52,13 @@ class ConfirmAction implements RequestHandlerInterface
         $command = new Command();
         $command->token = $data['token'] ?? '';
 
-        $violations = $this->validator->validate($command); // validation with symfony component.
-
-        if ($violations->count() > 0) {
+        try {
+            $this->validator->validate($command);
+        } catch (ValidationException $exception) {
             $errors = [];
 
             /** @var ConstraintViolationInterface $violation */
-            foreach ($violations as $violation) {
+            foreach ($exception->getViolations() as $violation) {
                 $errors[$violation->getPropertyPath()] = $violation->getMessage();
             }
             return new JsonResponse(['errors' => $errors], 422);
