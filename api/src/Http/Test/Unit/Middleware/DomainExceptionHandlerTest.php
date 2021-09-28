@@ -11,6 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Psr7\Factory\ResponseFactory;
 use Slim\Psr7\Factory\ServerRequestFactory;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @covers DomainExceptionHandler
@@ -26,7 +27,9 @@ class DomainExceptionHandlerTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
         $logger->expects($this->never())->method('warning'); // If success, the method should not be called
 
-        $middleware = new DomainExceptionHandler($logger);
+        $translator = $this->createStub(TranslatorInterface::class);
+
+        $middleware = new DomainExceptionHandler($logger, $translator);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturn($source = (new ResponseFactory())->createResponse());
@@ -45,7 +48,14 @@ class DomainExceptionHandlerTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
         $logger->expects($this->once())->method('warning'); // If exception, the method must be called 1 time
 
-        $middleware = new DomainExceptionHandler($logger);
+        $translator = $this->createMock(TranslatorInterface::class);
+        $translator->expects($this->once())->method('trans')->with(
+            $this->equalTo('Some error.'),
+            $this->equalTo([]),
+            $this->equalTo('exceptions')
+        )->willReturn('Ошибка.');
+
+        $middleware = new DomainExceptionHandler($logger, $translator);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willThrowException(new DomainException('Some error.'));
@@ -60,7 +70,7 @@ class DomainExceptionHandlerTest extends TestCase
         $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
         self::assertEquals([
-            'message' => 'Some error.',
+            'message' => 'Ошибка.',
         ], $data);
     }
 }
