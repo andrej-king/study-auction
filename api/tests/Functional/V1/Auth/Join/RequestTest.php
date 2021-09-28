@@ -72,6 +72,9 @@ class RequestTest extends WebTestCase
         ], Json::decode($body));
     }
 
+    /**
+     * Check answer with existing lang.
+     */
     public function testExistingLang(): void
     {
         $this->markTestIncomplete('Waiting for translation.');
