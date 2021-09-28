@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Middleware;
+use Middlewares\ContentLanguage;
 use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
 
@@ -12,7 +13,7 @@ return static function (App $app): void {
     $app->add(Middleware\ValidationExceptionHandler::class); // Wrap with "try-catch", for catch Validation exceptions.
     $app->add(Middleware\ClearEmptyInput::class); // Strip whitespace and empty files.
     $app->add(Middleware\TranslatorLocale::class); // Added translator locale.
-    $app->add(Middleware\LocaleNegotiation::class); // Added translator locale negotiation.
+    $app->add(ContentLanguage::class); // Added translator locales.
     $app->addBodyParsingMiddleware();
     $app->add(ErrorMiddleware::class);
 };

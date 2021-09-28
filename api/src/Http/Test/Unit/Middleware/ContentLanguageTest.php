@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Test\Unit\Middleware;
 
-use App\Http\Middleware\LocaleNegotiation;
+use Middlewares\ContentLanguage;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,30 +13,26 @@ use Slim\Psr7\Factory\ResponseFactory;
 use Slim\Psr7\Factory\ServerRequestFactory;
 
 /**
- * @covers LocaleNegotiation
+ * @covers ContentLanguage
  */
-class LocaleNegotiationTest extends TestCase
+class ContentLanguageTest extends TestCase
 {
     /**
      * Check default value.
      */
     public function testDefault(): void
     {
-        $middleware = new LocaleNegotiation(['en', 'ru']);
-
-        $source = (new ResponseFactory())->createResponse();
+        $middleware = new ContentLanguage(['en', 'ru']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturnCallback(
-            static function (ServerRequestInterface $request) use ($source): ResponseInterface {
+            static function (ServerRequestInterface $request): ResponseInterface {
                 self::assertEquals('en', $request->getHeaderLine('Accept-Language'));
-                return $source;
+                return (new ResponseFactory())->createResponse();
             }
         );
 
-        $response = $middleware->process(self::createRequest(), $handler);
-
-        self::assertEquals($source, $response);
+        $middleware->process(self::createRequest(), $handler);
     }
 
     /**
@@ -44,15 +40,13 @@ class LocaleNegotiationTest extends TestCase
      */
     public function testAccepted(): void
     {
-        $middleware = new LocaleNegotiation(['en', 'ru']);
-
-        $source = (new ResponseFactory())->createResponse();
+        $middleware = new ContentLanguage(['en', 'ru']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturnCallback(
-            static function (ServerRequestInterface $request) use ($source): ResponseInterface {
+            static function (ServerRequestInterface $request): ResponseInterface {
                 self::assertEquals('ru', $request->getHeaderLine('Accept-Language'));
-                return $source;
+                return (new ResponseFactory())->createResponse();
             }
         );
 
@@ -66,15 +60,13 @@ class LocaleNegotiationTest extends TestCase
      */
     public function testMulti(): void
     {
-        $middleware = new LocaleNegotiation(['en', 'fr', 'ru']);
-
-        $source = (new ResponseFactory())->createResponse();
+        $middleware = new ContentLanguage(['en', 'fr', 'ru']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturnCallback(
-            static function (ServerRequestInterface $request) use ($source): ResponseInterface {
+            static function (ServerRequestInterface $request): ResponseInterface {
                 self::assertEquals('ru', $request->getHeaderLine('Accept-Language'));
-                return $source;
+                return (new ResponseFactory())->createResponse();
             }
         );
 
@@ -88,15 +80,13 @@ class LocaleNegotiationTest extends TestCase
      */
     public function testOther(): void
     {
-        $middleware = new LocaleNegotiation(['en', 'ru']);
-
-        $source = (new ResponseFactory())->createResponse();
+        $middleware = new ContentLanguage(['en', 'ru']);
 
         $handler = $this->createStub(RequestHandlerInterface::class);
         $handler->method('handle')->willReturnCallback(
-            static function (ServerRequestInterface $request) use ($source): ResponseInterface {
+            static function (ServerRequestInterface $request): ResponseInterface {
                 self::assertEquals('en', $request->getHeaderLine('Accept-Language'));
-                return $source;
+                return (new ResponseFactory())->createResponse();
             }
         );
 
