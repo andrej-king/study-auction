@@ -29,6 +29,12 @@ class TranslatorLocale implements MiddlewareInterface
         $this->locales = $locales;
     }
 
+    /**
+     * @param ServerRequestInterface  $request
+     * @param RequestHandlerInterface $handler
+     *
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $locale = self::parseLocale(
@@ -43,6 +49,14 @@ class TranslatorLocale implements MiddlewareInterface
         return $handler->handle($request);
     }
 
+    /**
+     * Parse locale from allowed in settings
+     *
+     * @param string|null $accept
+     * @param array       $allowed
+     *
+     * @return string|null
+     */
     private static function parseLocale(?string $accept, array $allowed): ?string
     {
         /** @var ?string $default */
