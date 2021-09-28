@@ -21,6 +21,7 @@
         "slim/slim": "^4.3",
         "swiftmailer/swiftmailer": "^6.2",
         "symfony/cache": "^5.3",
+        "symfony/config": "^5.3",
         "symfony/console": "^5.3",
         "symfony/translation": "^5.3",
         "symfony/validator": "^5.3",
