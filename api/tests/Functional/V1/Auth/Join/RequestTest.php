@@ -84,7 +84,7 @@ class RequestTest extends WebTestCase
             'password' => 'new-password'
         ])->withHeader('Accept-Language', 'ru'));
 
-        self::assertEquals(409, $response->getStatusCode());
+        self::assertEquals(409, $response->getStatusCode()); // STATUS_CONFLICT
         self::assertJson($body = (string)$response->getBody());
 
         $data = Json::decode($body);
@@ -143,7 +143,7 @@ class RequestTest extends WebTestCase
             'password' => '',
         ])->withHeader('Accept-Language', 'es;q=0.9, ru;q=0.8, *;q=0.5')); // priority level (other 0.5)
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertEquals(422, $response->getStatusCode()); // STATUS_UNPROCESSABLE_ENTITY
         self::assertJson($body = (string)$response->getBody());
 
         $data = Json::decode($body);

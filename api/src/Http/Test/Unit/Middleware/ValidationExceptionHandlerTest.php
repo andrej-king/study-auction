@@ -52,7 +52,7 @@ class ValidationExceptionHandlerTest extends TestCase
 
         $response = $middleware->process(self::createRequest(), $handler);
 
-        self::assertEquals(422, $response->getStatusCode());
+        self::assertEquals(422, $response->getStatusCode()); // STATUS_UNPROCESSABLE_ENTITY
         self::assertJson($body = (string)$response->getBody());
 
         /** @var array $data */

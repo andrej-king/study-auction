@@ -91,7 +91,7 @@ class ConfirmTest extends WebTestCase
             'token' => Uuid::uuid4()->toString(),
         ]));
 
-        self::assertEquals(409, $response->getStatusCode());
+        self::assertEquals(409, $response->getStatusCode()); // STATUS_CONFLICT
         self::assertJson($body = (string)$response->getBody());
 
         self::assertEquals([

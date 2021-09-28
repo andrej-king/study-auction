@@ -32,7 +32,7 @@ class ValidationExceptionHandler implements MiddlewareInterface
         } catch (ValidationException $exception) {
             return new JsonResponse([
                 'errors' => self::errorsArray($exception->getViolations()),
-            ], 422);
+            ], 422); // STATUS_UNPROCESSABLE_ENTITY
         }
     }
 
