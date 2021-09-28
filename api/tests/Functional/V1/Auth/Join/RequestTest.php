@@ -121,7 +121,7 @@ class RequestTest extends WebTestCase
         $response = $this->app()->handle(self::json('POST', '/v1/auth/join', [
             'email' => 'not-email',
             'password' => '',
-        ])->withHeader('Accept-Language', 'es;q=0.9, ru;q=0.8, *;q=0.5'));
+        ])->withHeader('Accept-Language', 'es;q=0.9, ru;q=0.8, *;q=0.5')); // priority level (other 0.5)
 
         self::assertEquals(422, $response->getStatusCode());
         self::assertJson($body = (string)$response->getBody());
