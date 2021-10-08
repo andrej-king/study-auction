@@ -7,7 +7,10 @@
 
 # add rules: sudo chown $USER:$USER api/src/ -R
 
-init: docker-down-clear api-clear docker-build docker-up api-init
+init: docker-down-clear \
+	api-clear frontend-clear \
+	docker-build docker-up \
+	api-init frontend-init
 up: docker-up
 down: docker-down
 restart: docker-down docker-up
@@ -90,6 +93,15 @@ api-test-functional:
 
 api-test-functional-coverage:
 	docker-compose run --rm api-php-cli composer test-coverage -- --testsuite=functional
+
+# clear folders
+frontend-clear:
+	docker run --rm -v ${PWD}/frontend:/app -w /app alpine sh -c 'rm -rf build'
+
+frontend-init: frontend-yarn-install
+
+frontend-yarn-install:
+	docker-compose run --rm frontend-node-cli yarn install
 
 build: build-gateway build-frontend build-api
 
