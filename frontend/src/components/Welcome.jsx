@@ -1,9 +1,9 @@
 import React from 'react';
-import cl from './Welcome.module.css';
+import styles from './Welcome.module.css';
 
 const Welcome = () => {
   return (
-    <div className={cl.welcome}>
+    <div className={styles.welcome}>
       <h1>Auction</h1>
       <p>We will be here soon</p>
     </div>
