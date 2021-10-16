@@ -31,6 +31,7 @@ services:
 
     # docker-compose run --rm frontend-node-cli npx create-react-app react-app
     # docker-compose run --rm frontend-node-cli yarn build
+    # docker-compose run --rm frontend-node-cli yarn test
     frontend-node-cli:
         build:
             context: frontend/docker/development/node
