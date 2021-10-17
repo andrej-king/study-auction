@@ -15,7 +15,7 @@ up: docker-up
 down: docker-down
 restart: docker-down docker-up
 check: lint analyze validate-schema test
-lint: api-lint
+lint: api-lint frontend-lint
 analyze: api-analyze
 validate-schema: api-validate-schema
 test: api-test api-fixtures frontend-test
@@ -106,6 +106,11 @@ frontend-yarn-install:
 # Файл .ready нужен чтобы запустить сервер только после того как были установлены все пакеты
 frontend-ready:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
+
+# check code style for html / js
+frontend-lint:
+	docker-compose run --rm frontend-node-cli yarn lint
+	#docker-compose run --rm frontend-node-cli yarn lint -- fix # auto fix
 
 frontend-test:
 	docker-compose run --rm frontend-node-cli yarn test --watchAll=false
