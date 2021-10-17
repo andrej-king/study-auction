@@ -110,7 +110,10 @@ frontend-ready:
 # check code style for html / js
 frontend-lint:
 	docker-compose run --rm frontend-node-cli yarn lint
-	#docker-compose run --rm frontend-node-cli yarn lint-fix # auto fix
+
+# auto fix for js
+frontend-lint-fix:
+	docker-compose run --rm frontend-node-cli yarn lint-fix
 
 frontend-test:
 	docker-compose run --rm frontend-node-cli yarn test --watchAll=false
