@@ -120,6 +120,10 @@ frontend-eslint-fix:
 frontend-stylelint-fix:
 	docker-compose run --rm frontend-node-cli yarn stylelint-fix
 
+# prettier linter (fix code styles by rules)
+frontend-pretty:
+	docker-compose run --rm frontend-node-cli yarn prettier
+
 frontend-test:
 	docker-compose run --rm frontend-node-cli yarn test --watchAll=false
 
