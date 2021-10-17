@@ -103,7 +103,7 @@ frontend-init: frontend-yarn-install frontend-ready
 frontend-yarn-install:
 	docker-compose run --rm frontend-node-cli yarn install
 
-# Файл .ready нужен чтобы запустить сервер только после того как были установлены все пакеты
+# The .ready file is needed to start the server only after all packages have been installed
 frontend-ready:
 	docker run --rm -v ${PWD}/frontend:/app -w /app alpine touch .ready
 
