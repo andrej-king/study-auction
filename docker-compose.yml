@@ -108,5 +108,12 @@ services:
     mailer:
         image: mailhog/mailhog
 
+    # for end-to-end tests
+    # docker-compose run --rm cucumber-node-cli yarn add @cucumber/cucumber
+    cucumber-node-cli:
+        build: cucumber/docker/development/node
+        volumes:
+            - ./cucumber:/app
+
 volumes:
     api-postgres:
