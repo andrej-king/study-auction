@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "e2e": "cucumber-js"
+  },
   "dependencies": {
     "@cucumber/cucumber": "^8.0.0-rc.1"
   }
