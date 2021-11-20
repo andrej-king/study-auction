@@ -1,2 +1,13 @@
+/.idea
+
+# dependencies
 /node_modules
-/yarn-error.log
+
+# testing
+/coverage
+
+# production
+/build
+
+/yarn-debug.log*
+/yarn-error.log*
