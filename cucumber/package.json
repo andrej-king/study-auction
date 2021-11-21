@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "smoke": "cucumber-js --tags @smoke --fail-fast --parallel 2",
     "e2e": "cucumber-js --parallel 4",
     "eslint": "eslint --ext .js features",
     "eslint-fix": "eslint --fix --ext .js features"

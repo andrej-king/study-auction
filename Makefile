@@ -25,6 +25,7 @@ test-unit: api-test-unit
 test-unit-coverage: api-test-unit-coverage
 test-functional: api-test-functional api-fixtures
 test-functional-coverage: api-test-functional-coverage api-fixtures
+test-smoke: api-fixtures cucumber-clear cucumber-smoke
 test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
 docker-up:
@@ -149,6 +150,10 @@ cucumber-lint:
 # check and fix js code style
 cucumber-lint-fix:
 	docker-compose run --rm cucumber-node-cli yarn eslint-fix
+
+# smoke test (fast check if available website)
+cucumber-smoke:
+	docker-compose run --rm cucumber-node-cli yarn smoke
 
 # run e2e tests
 cucumber-e2e:
