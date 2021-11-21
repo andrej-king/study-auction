@@ -8,7 +8,7 @@
 # add rules: sudo chown $USER:$USER api/src/ -R
 
 init: docker-down-clear \
-	api-clear frontend-clear \
+	api-clear frontend-clear cucumber-clear\
 	docker-build docker-up \
 	api-init frontend-init cucumber-init
 up: docker-up
@@ -24,7 +24,7 @@ test-unit: api-test-unit
 test-unit-coverage: api-test-unit-coverage
 test-functional: api-test-functional api-fixtures
 test-functional-coverage: api-test-functional-coverage api-fixtures
-test-e2e: api-fixtures cucumber-e2e
+test-e2e: api-fixtures cucumber-clear cucumber-e2e
 
 docker-up:
 	docker-compose up -d # --scale frontend=3
@@ -131,18 +131,25 @@ frontend-test:
 frontend-test-watch:
 	docker-compose run --rm frontend-node-cli yarn test
 
+# clear var directory (with screenshots)
+cucumber-clear:
+	docker run --rm -v ${PWD}/cucumber:/app -w /app alpine sh -c 'rm -rf var/*'
+
 cucumber-init: cucumber-yarn-install
 
 # install cucumber js (for end-to-end tests)
 cucumber-yarn-install:
 	docker-compose run --rm cucumber-node-cli yarn install
 
+# check js code style
 cucumber-lint:
 	docker-compose run --rm cucumber-node-cli yarn eslint
 
+# check and fix js code style
 cucumber-lint-fix:
 	docker-compose run --rm cucumber-node-cli yarn eslint-fix
 
+# run e2e tests
 cucumber-e2e:
 	docker-compose run --rm cucumber-node-cli yarn e2e
 
