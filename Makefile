@@ -24,7 +24,11 @@ test-unit: api-test-unit
 test-unit-coverage: api-test-unit-coverage
 test-functional: api-test-functional api-fixtures
 test-functional-coverage: api-test-functional-coverage api-fixtures
-test-e2e: api-fixtures cucumber-clear cucumber-e2e
+test-e2e:
+	make api-fixtures
+	make cucumber-clear
+	- make cucumber-e2e # '-' ignore any errors
+	make cucumber-report-html
 
 docker-up:
 	docker-compose up -d # --scale frontend=3
@@ -152,6 +156,9 @@ cucumber-lint-fix:
 # run e2e tests
 cucumber-e2e:
 	docker-compose run --rm cucumber-node-cli yarn e2e
+
+cucumber-report-html:
+	docker-compose run --rm cucumber-node-cli yarn report-html
 
 build: build-gateway build-frontend build-api
 

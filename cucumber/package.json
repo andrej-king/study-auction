@@ -1,12 +1,14 @@
 {
   "scripts": {
     "e2e": "cucumber-js --format json:var/report.json",
+    "report-html": "node reporter.js",
     "eslint": "eslint --ext .js features",
     "eslint-fix": "eslint --fix --ext .js features"
   },
   "dependencies": {
     "@cucumber/cucumber": "^8.0.0-rc.1",
     "chai": "^4.3.4",
+    "cucumber-html-reporter": "^5.5.0",
     "puppeteer": "^11.0.0"
   },
   "devDependencies": {

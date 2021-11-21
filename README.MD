@@ -15,3 +15,5 @@
 [eslint](https://eslint.org/) for check <b>JS</b> code style. \
 [puppeteer](https://github.com/puppeteer/puppeteer) for work with [Dev tool protocol (Chrome)](https://chromedevtools.github.io/devtools-protocol/#:~:text=The%20Chrome%20DevTools%20Protocol%20allows,the%20team%20maintains%20its%20API). \
 [chai](https://github.com/chaijs/chai) for check asserts.
+###### Optional
+[cucumber-html-reporter](https://github.com/gkushang/cucumber-html-reporter) for check reports in HTML format. 
