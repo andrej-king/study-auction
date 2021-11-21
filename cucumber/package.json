@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "e2e": "cucumber-js",
+    "e2e": "cucumber-js --parallel 4",
     "eslint": "eslint --ext .js features",
     "eslint-fix": "eslint --fix --ext .js features"
   },
