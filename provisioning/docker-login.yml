@@ -2,6 +2,7 @@
 -   name: Log into private registry
     hosts: site
     remote_user: ubuntu
+    become: yes
     become_user: deploy
     vars_prompt:
       -   name: registry
