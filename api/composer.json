@@ -3,8 +3,11 @@
     "type": "project",
     "license": "BSD-3-Clause",
     "config": {
-      "process-timeout": 0,
-      "sort-packages": true
+        "process-timeout": 0,
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     },
     "require": {
         "php": "^7.4",
